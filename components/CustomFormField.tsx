@@ -20,6 +20,9 @@ import Image from 'next/image';
 import DatePicker from 'react-datepicker';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import { Select, SelectContent, SelectTrigger, SelectValue } from './ui/select';
+import { Textarea } from './ui/textarea';
+import { Checkbox } from './ui/checkbox';
 
 interface CustomProps {
   control: Control<any>;
@@ -53,17 +56,16 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         <div className="flex rounded-md border border-dark-500 bg-dark-400">
           {props.iconSrc && (
             <Image
-              src={iconSrc}
-              alt={iconAlt || 'icon'}
-              width={24}
+              src={props.iconSrc}
               height={24}
+              width={24}
+              alt={props.iconAlt || 'icon'}
               className="ml-2"
             />
           )}
           <FormControl>
             <Input
-              type="text"
-              placeholder={placeholder}
+              placeholder={props.placeholder}
               {...field}
               className="shad-input border-0"
             />
@@ -74,8 +76,8 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       return (
         <FormControl>
           <PhoneInput
-            placeholder="087 123 4567"
             defaultCountry="IE"
+            placeholder={props.placeholder}
             international
             withCountryCallingCode
             value={field.value as E164Number | undefined}
@@ -108,6 +110,48 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       );
     case FormFieldType.SKELETON:
       return renderSkeleton ? renderSkeleton(field) : null;
+
+    case FormFieldType.SELECT:
+      return (
+        <FormControl>
+          <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl>
+              <SelectTrigger className="shad-select-trigger">
+                <SelectValue placeholder={placeholder}></SelectValue>
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent className="shad-select-content">
+              {props.children}
+            </SelectContent>
+          </Select>
+        </FormControl>
+      );
+    case FormFieldType.TEXTAREA:
+      return (
+        <FormControl>
+          <Textarea
+            className="shad-textarea"
+            disabled={props.disabled}
+            placeholder={placeholder}
+            {...field}
+          ></Textarea>
+        </FormControl>
+      );
+    case FormFieldType.CHECKBOX:
+      return (
+        <FormControl>
+          <div className="flex items-center gap-4">
+            <Checkbox
+              id={props.name}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            ></Checkbox>
+            <label htmlFor={props.name} className="checkbox-label">
+              {props.label}
+            </label>
+          </div>
+        </FormControl>
+      );
   }
 };
 
