@@ -166,7 +166,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                         value={option}
                         id={option}
                       ></RadioGroupItem>
-                      <Label htmlFor={option} className="cursor-pointer">
+                      <Label htmlFor={option} className="cursor-pointer capitalize">
                         {option}
                       </Label>
                     </div>
