@@ -1,6 +1,6 @@
 import { DataTable } from '@/components/table/DataTable';
 import StatCard from '@/components/StatCard';
-import { columns, Payment } from '@/components/table/columns';
+import { columns} from '@/components/table/columns';
 import { getRecentAppointments } from '@/lib/actions/apppointments.actions';
 import Image from 'next/image';
 import Link from 'next/link';

@@ -50,9 +50,6 @@ export const getRecentAppointments = async () => {
       APPOINTMENT_COLLECTION_ID!
     );
 
-
-    console.log(appointments);
-
     const initialCounts = {
       scheduledCount: 0,
       pendingCount: 0,
