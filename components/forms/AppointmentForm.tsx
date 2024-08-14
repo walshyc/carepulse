@@ -3,15 +3,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
-import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import CustomFormField from '../CustomFormField';
 import SubmitButton from '../SubmitButton';
 import { useState } from 'react';
 import { getAppointmentSchema } from '@/lib/validation';
 import { useRouter } from 'next/navigation';
-import { createUser } from '@/lib/actions/patient.actions';
 import { FormFieldType } from './PatientForm';
 import { Doctors } from '@/constants';
 import { SelectItem } from '../ui/select';
@@ -49,8 +46,8 @@ const AppointmentForm = ({
         ? new Date(appointment.schedule)
         : new Date(Date.now()),
       reason: appointment ? appointment.reason : '',
-      note: appointment?.note || '',
-      cancellationReason: appointment?.cancellationReason || '',
+      note: appointment?.note ?? '',
+      cancellationReason: appointment?.cancellationReason ?? '',
     },
   });
 

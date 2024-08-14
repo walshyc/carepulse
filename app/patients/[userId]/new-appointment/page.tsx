@@ -1,22 +1,17 @@
 import AppointmentForm from '@/components/forms/AppointmentForm';
-import PatientForm from '@/components/forms/PatientForm';
-import { Button } from '@/components/ui/button';
 import { getPatient } from '@/lib/actions/patient.actions';
 import Image from 'next/image';
-import Link from 'next/link';
 import * as Sentry from '@sentry/nextjs';
 
 export default async function NewAppointment({
   params: { userId },
-}: SearchParamProps) {
+}: Readonly<SearchParamProps>) {
   const patient = await getPatient(userId);
 
   Sentry.metrics.set('user_view_new-appointment', patient.name);
 
   return (
     <div className="flex h-screen max-h-screen">
-      {/* TODO: OPT Verification | Passkey modal */}
-
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[860px] flex-1 justify-between">
           <Image
@@ -30,8 +25,9 @@ export default async function NewAppointment({
           <AppointmentForm
             type="create"
             userId={userId}
-            patientId={patient.$id}
-          />
+            patientId={patient.$id} setOpen={function (open: boolean): void {
+              throw new Error('Function not implemented.');
+            } }          />
           <p className="copyright mt-10 py-12">© 2024 CarePulse</p>
         </div>
       </section>

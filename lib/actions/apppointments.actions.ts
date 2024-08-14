@@ -1,12 +1,9 @@
 'use server';
 import { ID, Query } from 'node-appwrite';
 import {
-  BUCKET_ID,
   DATABASE_ID,
   databases,
-  ENDPOINT,
   APPOINTMENT_COLLECTION_ID,
-  PROJECT_ID,
 } from '../appwrite.config';
 import { parseStringify } from '../utils';
 import { Appointment } from '@/types/appwrite.types';
