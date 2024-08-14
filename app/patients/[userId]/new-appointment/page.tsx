@@ -1,4 +1,5 @@
 import AppointmentForm from '@/components/forms/AppointmentForm';
+
 import { getPatient } from '@/lib/actions/patient.actions';
 import Image from 'next/image';
 import * as Sentry from '@sentry/nextjs';
@@ -25,9 +26,8 @@ export default async function NewAppointment({
           <AppointmentForm
             type="create"
             userId={userId}
-            patientId={patient.$id} setOpen={function (open: boolean): void {
-              throw new Error('Function not implemented.');
-            } }          />
+            patientId={patient.$id}
+          />
           <p className="copyright mt-10 py-12">© 2024 CarePulse</p>
         </div>
       </section>
