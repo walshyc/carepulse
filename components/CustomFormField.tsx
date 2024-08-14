@@ -1,14 +1,11 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Control } from 'react-hook-form';
-import { z } from 'zod';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
+import { E164Number } from "libphonenumber-js/core";
 import {
-  Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -41,11 +38,7 @@ interface CustomProps {
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const {
-    iconSrc,
-    fieldType,
-    iconAlt,
     placeholder,
-    name,
     showTimeSelect,
     dateFormat,
     renderSkeleton,
